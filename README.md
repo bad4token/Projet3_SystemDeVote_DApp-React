@@ -44,12 +44,27 @@ function tallyVotes() external onlyOwner {
 <br/>
 
 ### **1.3. Correction d'une faille de sécurité**
+Identification de la faille :  `DoS avec Block Gas Limit`  
+Dans le cas où un utilisateur ajoute un nombre important de propositions nous nous retrouvons alors avec un problème dans la boucle de la fonction `tallyvote()`  
+En effet la fonction ne peut aller au bout car elle attendra la limite de gas du bloc.  
+Cela aura pour conséquance de bloquer l'application.
+
 Correction :
+Nous allons mettre un `require` à la fonction `addProposal()` qui imposera de ne pas dépasser une certaine taille au tableau `proposalsArray` qui reçoit les propositions.
 ```js
+/// @dev Add a proposal
+/// @param _desc text of proposal
+function addProposal(string memory _desc) external onlyVoters {
+    require(workflowStatus == WorkflowStatus.ProposalsRegistrationStarted, 'Proposals are not allowed yet');
+    require(proposalsArray.length < 5, 'Limite de propositions atteinte');
+    require(keccak256(abi.encode(_desc)) != keccak256(abi.encode("")), 'Vous ne pouvez pas ne rien proposer'); // facultatif
+    // voir que desc est different des autres
 
-
-
-
+    Proposal memory proposal;
+    proposal.description = _desc;
+    proposalsArray.push(proposal);
+    emit ProposalRegistered(proposalsArray.length-1);
+}
 ```
 
 <br/><br/>
