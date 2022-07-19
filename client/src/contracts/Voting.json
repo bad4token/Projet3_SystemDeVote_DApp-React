@@ -19918,6 +19918,12 @@
     "version": "0.8.15+commit.e14f2714.Emscripten.clang"
   },
   "networks": {
+    "3": {
+      "events": {},
+      "links": {},
+      "address": "0x3D2f4B75e3e0efbA20038c72f715dD0fCF391d25",
+      "transactionHash": "0x381d9fa1954d837996774f7b2dbfc2c1885b21084546951f36da98442228a29b"
+    },
     "1658104146617": {
       "events": {},
       "links": {},
@@ -20131,7 +20137,7 @@
     }
   },
   "schemaVersion": "3.4.7",
-  "updatedAt": "2022-07-19T09:16:36.175Z",
+  "updatedAt": "2022-07-19T09:58:52.522Z",
   "networkType": "ethereum",
   "devdoc": {
     "author": "BADET Gregory",
