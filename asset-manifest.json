@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/Projet3_SystemDeVote_DApp-React/static/css/main.c6bd55cb.css",
-    "main.js": "/Projet3_SystemDeVote_DApp-React/static/js/main.85457a09.js",
+    "main.js": "/Projet3_SystemDeVote_DApp-React/static/js/main.b37f4216.js",
     "static/media/logo_vote.jpg": "/Projet3_SystemDeVote_DApp-React/static/media/logo_vote.d6efbe90e4ed92429854.jpg",
     "index.html": "/Projet3_SystemDeVote_DApp-React/index.html",
     "main.c6bd55cb.css.map": "/Projet3_SystemDeVote_DApp-React/static/css/main.c6bd55cb.css.map",
-    "main.85457a09.js.map": "/Projet3_SystemDeVote_DApp-React/static/js/main.85457a09.js.map"
+    "main.b37f4216.js.map": "/Projet3_SystemDeVote_DApp-React/static/js/main.b37f4216.js.map"
   },
   "entrypoints": [
     "static/css/main.c6bd55cb.css",
-    "static/js/main.85457a09.js"
+    "static/js/main.b37f4216.js"
   ]
 }
