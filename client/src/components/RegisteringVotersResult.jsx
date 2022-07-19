@@ -1,16 +1,23 @@
-import React, { Component } from "react"
+import React, { useEffect, useState } from 'react';
 
 import { Container, Row, Col, Form, FloatingLabel, Button, Badge, InputGroup, Offcanvas, Table } from 'react-bootstrap';
 
-export default class RegisteringVotersResult extends Component {
+
+export default class RegisteringVotersResult extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { voters: [] };
+    this.state = { nbVoter: 0, voters: [] };
     this.getAllVoters();
     this.getAllVotes();
   }
 
+  componentDidMount(){
+    this.getAllVoters = this.getAllVoters.bind(this);
+    this.getAllVotes = this.getAllVotes.bind(this);
+  }
+
   getAllVoters = async () => {
+    const component = this;
     this.props.contract.getPastEvents('VoterRegistered', { fromBlock: 0, toBlock: 'latest' })
       .then((results) => {
         let voters = [];

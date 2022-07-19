@@ -70,7 +70,8 @@ function App() {
         const addrUser = setAddrUser(accounts[0]);
 
         if(owner==accounts[0]){
-          await SetDisplayAdmintool();
+          setDisplayAdmintool(1);
+//          await SetDisplayAdmintool();
         }
 
         switch (workflowStatus) {
@@ -102,9 +103,9 @@ function App() {
     })();
   }, []);
 
-  async function SetDisplayAdmintool(){
-    setDisplayAdmintool(1);
-  }
+//  async function SetDisplayAdmintool(){
+//    setDisplayAdmintool(1);
+//  }
 
   if (!state.web3) {
     return (

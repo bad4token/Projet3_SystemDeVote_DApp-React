@@ -3,37 +3,28 @@
 pragma solidity 0.8.15;
 import "../node_modules/@openzeppelin/contracts/access/Ownable.sol";
 
-/**
- * @title Voting
- * @dev Voting project Alyra #3
- * @author BADET Gregory
- * @notice We use uint16 size to index propoesals, voters and sessions (limit 65 536)
- */
+/// @title Voting Contract
+/// @author BADET Gregory
+/// @notice Vous ne pouvez utiliser ce contrat que pour la réalisation de vote.
 
 contract Voting is Ownable {
 
     uint public winningProposalID;
     
-    /**
-    * @dev Structure of Voter
-    */
+    /// @dev Structure of Voter
     struct Voter {
         bool isRegistered;
         bool hasVoted;
         uint votedProposalId;
     }
 
-    /**
-    * @dev Structure of Proposal
-    */
+    /// @dev Structure of Proposal
     struct Proposal {
         string description;
         uint voteCount;
     }
 
-    /**
-    * @dev WorkflowStatus
-    */
+    /// @dev WorkflowStatus
     enum  WorkflowStatus {
         RegisteringVoters,
         ProposalsRegistrationStarted,
@@ -61,28 +52,22 @@ contract Voting is Ownable {
     }
 
 
-    /**
-    * @dev Get data of a voter
-    * @param _addr address of voter
-    */
+    /// @dev Get data of a voter
+    /// @param _addr address of voter
     function getVoter(address _addr) external onlyVoters view returns (Voter memory) {
         return voters[_addr];
     }
     
 
-    /**
-    * @dev Get data of a proposal
-    * @param _id id of proposal
-    */
+    /// @dev Get data of a proposal
+    /// @param _id id of proposal
     function getOneProposal(uint _id) external onlyVoters view returns (Proposal memory) {
         return proposalsArray[_id];
     }
 
  
-    /**
-    * @dev Add a voter
-    * @param _addr address of new voter
-    */
+    /// @dev Add a voter
+    /// @param _addr address of new voter
     function addVoter(address _addr) external onlyOwner {
         require(workflowStatus == WorkflowStatus.RegisteringVoters, 'Voters registration is not open yet');
         require(voters[_addr].isRegistered != true, 'Already registered');
@@ -92,10 +77,8 @@ contract Voting is Ownable {
     }
  
 
-    /**
-    * @dev Add a proposal
-    * @param _desc text of proposal
-    */
+    /// @dev Add a proposal
+    /// @param _desc text of proposal
     function addProposal(string memory _desc) external onlyVoters {
         require(workflowStatus == WorkflowStatus.ProposalsRegistrationStarted, 'Proposals are not allowed yet');
         require(keccak256(abi.encode(_desc)) != keccak256(abi.encode("")), 'Vous ne pouvez pas ne rien proposer'); // facultatif
@@ -108,10 +91,8 @@ contract Voting is Ownable {
     }
 
 
-    /**
-    * @dev Set a vote
-    * @param _id id of proposal to vote
-    */
+    /// @dev Set a vote
+    /// @param _id id of proposal to vote
     function setVote( uint _id) external onlyVoters {
         require(workflowStatus == WorkflowStatus.VotingSessionStarted, 'Voting session havent started yet');
         require(voters[msg.sender].hasVoted != true, 'You have already voted');
@@ -125,9 +106,7 @@ contract Voting is Ownable {
     }
 
 
-    /**
-    * @dev Change status to startProposalsRegistering
-    */ 
+    /// @dev Change status to startProposalsRegistering
     function startProposalsRegistering() external onlyOwner {
         require(workflowStatus == WorkflowStatus.RegisteringVoters, 'Registering proposals cant be started now');
         workflowStatus = WorkflowStatus.ProposalsRegistrationStarted;
@@ -135,9 +114,7 @@ contract Voting is Ownable {
     }
 
 
-    /**
-    * @dev Change status to endProposalsRegistering
-    */ 
+    /// @dev Change status to endProposalsRegistering
     function endProposalsRegistering() external onlyOwner {
         require(workflowStatus == WorkflowStatus.ProposalsRegistrationStarted, 'Registering proposals havent started yet');
         workflowStatus = WorkflowStatus.ProposalsRegistrationEnded;
@@ -145,9 +122,7 @@ contract Voting is Ownable {
     }
 
 
-    /**
-    * @dev Change status to startVotingSession
-    */ 
+    /// @dev Change status to startVotingSession
     function startVotingSession() external onlyOwner {
         require(workflowStatus == WorkflowStatus.ProposalsRegistrationEnded, 'Registering proposals phase is not finished');
         workflowStatus = WorkflowStatus.VotingSessionStarted;
@@ -155,9 +130,7 @@ contract Voting is Ownable {
     }
 
 
-    /**
-    * @dev Change status to endVotingSession
-    */ 
+    /// @dev Change status to endVotingSession
     function endVotingSession() external onlyOwner {
         require(workflowStatus == WorkflowStatus.VotingSessionStarted, 'Voting session havent started yet');
         workflowStatus = WorkflowStatus.VotingSessionEnded;
@@ -165,9 +138,7 @@ contract Voting is Ownable {
     }
 
 
-    /**
-    * @dev Change status to tallyVotes and extract winner
-    */ 
+    /// @dev Change status to tallyVotes and extract winner
     function tallyVotes() external onlyOwner {
        require(workflowStatus == WorkflowStatus.VotingSessionEnded, "Current status is not voting session ended");
        uint _winningProposalId;

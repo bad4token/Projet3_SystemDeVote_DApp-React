@@ -1,3 +1,5 @@
+// Import ASSETS
+import logo from './../logo_vote.jpg';
 import { Button, Spinner } from 'react-bootstrap';
 
 function CnxWeb3() {
@@ -14,6 +16,10 @@ function CnxWeb3() {
         />
          <br />Loading WEB3...
       </Button>
+      <br />
+      <br />
+      <br />
+      <img src={logo} className="App-logo-off" alt="logo" />
     </div>
   );
 }

@@ -1,71 +1,88 @@
-# Getting Started with Create React App
+![N|Solid](https://www.coe.int/documents/14181903/15917751/logo-vote-2022.jpg/532b2399-6926-9fca-a87d-fd2d59f1ccb7?t=1654677562000)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# DApp React : Voting
+## _Realisation d'une application en REACT de l'application de voting_
 
-## Available Scripts
+<br/>
 
-In the project directory, you can run:
+## **1. Smart Contract**
+Nous allons faire quelques modifications à notre Smart Contract.
 
-### `npm start`
+<br/>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### **1.1. Utilisation des commentaires avec natspec**
+Voir le [Smart Contracts](https://github.com/bad4token/Projet3_SystemDeVote_DApp-React/blob/main/truffle/contracts/Voting.sol) modifié avec les spécificitées natspec .
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<br/>
 
-### `npm test`
+### **1.2. Ajout d'un event WinnerIs**
+Dans le cadre de l'application il sera nécessaire de pouvoir récupérer l'`ID` du gagnant. Pour cela ajoutons un event :
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+```js
+event WinnerIs (uint proposalId);
+```
+et modifions aussi la fonction `tallyVotes()`
+```js
+/// @dev Change status to tallyVotes and extract winner
+function tallyVotes() external onlyOwner {
+    require(workflowStatus == WorkflowStatus.VotingSessionEnded, "Current status is not voting session ended");
+    uint _winningProposalId;
+    for (uint256 p = 0; p < proposalsArray.length; p++) {
+        if (proposalsArray[p].voteCount > proposalsArray[_winningProposalId].voteCount) {
+            _winningProposalId = p;
+        }
+    }
+    winningProposalID = _winningProposalId;
 
-### `npm run build`
+    emit WinnerIs(winningProposalID);
+    
+    workflowStatus = WorkflowStatus.VotesTallied;
+    emit WorkflowStatusChange(WorkflowStatus.VotingSessionEnded, WorkflowStatus.VotesTallied);
+}
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<br/>
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### **1.3. Correction d'une faille de sécurité**
+Correction :
+```js
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+<br/><br/>
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## **2. Application DApp**
+Nous allons faire quelques modifications à notre Smart Contract.
 
-## Learn More
+<br/>
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### **2.1. Vidéo de présentation de l'application**
+Désolé pour le "_toc toc toc_"
+![https://www.loom.com/share/c1e223ed05a24c0b869a8ca0d4d12df0](https://cdn.pixabay.com/photo/2015/09/15/17/18/vector-video-player-941434_960_720.png)
+https://www.loom.com/share/c1e223ed05a24c0b869a8ca0d4d12df0
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+<br/>
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### **2.2. Mise en ligne sur Github Pages**
 
-### Analyzing the Bundle Size
+Le Smart Contract a été déployé sur le testnet Ropsten à l'adresse suivante  
+https://bad4token.github.io/Projet3_SystemDeVote_DApp-React
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+L'application est visible en ligne à l'adresse suivante.  
+https://bad4token.github.io/Projet3_SystemDeVote_DApp-React
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
-### Advanced Configuration
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
 
-### Deployment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
 
-### `npm run build` fails to minify
+<br/><br/>
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
-# Projet3_SystemDeVote_DApp-React
+## **3. License**
+
+MIT

@@ -12,6 +12,11 @@
   }
 }
 
+.App-logo-off {
+  -webkit-filter: grayscale(100%); /* Pour les navigateurs Chrome, Safari, Opera */
+  filter: grayscale(100%); /* Firefox */
+}
+
 .App-header {
   background-color: #FCFEFF;
   min-height: 100vh;
