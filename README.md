@@ -21,7 +21,7 @@ Dans le cadre de l'application il sera nécessaire de pouvoir récupérer l'`ID`
 ```js
 event WinnerIs (uint proposalId);
 ```
-et modifions aussi la fonction `tallyVotes()`
+et modifions aussi la fonction `tallyVotes()` en ajoutant un `emit`
 ```js
 /// @dev Change status to tallyVotes and extract winner
 function tallyVotes() external onlyOwner {
@@ -59,10 +59,13 @@ Nous allons faire quelques modifications à notre Smart Contract.
 
 <br/>
 
-### **2.1. Vidéo de présentation de l'application**
+### **2.1. Vidéo de présentation**
+
+<br/>
+
+VIDEO : https://www.loom.com/share/c1e223ed05a24c0b869a8ca0d4d12df0
+
 Désolé pour le "_toc toc toc_"
-![https://www.loom.com/share/c1e223ed05a24c0b869a8ca0d4d12df0](https://cdn.pixabay.com/photo/2015/09/15/17/18/vector-video-player-941434_960_720.png)
-https://www.loom.com/share/c1e223ed05a24c0b869a8ca0d4d12df0
 
 <br/>
 
