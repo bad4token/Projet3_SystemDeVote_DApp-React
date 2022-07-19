@@ -1,4 +1,4 @@
-![N|Solid](https://www.coe.int/documents/14181903/15917751/logo-vote-2022.jpg/532b2399-6926-9fca-a87d-fd2d59f1ccb7?t=1654677562000)
+![N|Solid](assets/capture1.png)
 
 # DApp React : Voting
 ## _Realisation d'une application en REACT de l'application de voting_
@@ -88,7 +88,7 @@ Désolé pour le "_toc toc toc_"
 ### **2.2. Mise en ligne sur Github Pages**
 
 Le Smart Contract a été déployé sur le testnet Ropsten à l'adresse suivante  
-https://bad4token.github.io/Projet3_SystemDeVote_DApp-React
+https://ropsten.etherscan.io/address/0x3D2f4B75e3e0efbA20038c72f715dD0fCF391d25
 
 L'application est visible en ligne à l'adresse suivante.  
 https://bad4token.github.io/Projet3_SystemDeVote_DApp-React
